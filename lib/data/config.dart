@@ -1,0 +1,3 @@
+String supabaseLink = 'https://xkroqbtjkrafaskxujpg.supabase.co';
+String supabaseAnonKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhrcm9xYnRqa3JhZmFza3h1anBnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDUyNTI5NjcsImV4cCI6MjAyMDgyODk2N30.7Xj-IXFn97d29_Ug1TSWjhhdy9l9Un4IHpNuW1rKykc';

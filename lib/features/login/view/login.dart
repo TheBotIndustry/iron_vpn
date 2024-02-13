@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_v2ray/flutter_v2ray.dart';
+import 'package:iron_vpn/data/vpn_links.dart';
+import 'package:iron_vpn/extensions/list_extensions.dart';
 import 'package:iron_vpn/main.dart';
 import 'package:iron_vpn/services/snack_bar.dart';
+import 'package:iron_vpn/services/vpn_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
+  late FlutterV2ray? flutterV2ray;
 
   void checkUser(String userID) async {
     isLoading = true;
@@ -38,9 +43,17 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void onStart() async {
+    // final users = await supabase.from('users').select().eq('paid', true);
+    // print(users);
+    String link = vpnList.randomItem();
+    flutterV2ray = await VPNService().connectVPN(link);
+  }
+
   @override
   void initState() {
     super.initState();
+    onStart();
   }
 
   final TextEditingController telegramController = TextEditingController();
@@ -99,10 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(
+                Center(
                   child: Text(
-                    'Авторизация',
-                    style: TextStyle(
+                    (flutterV2ray != null) ? flutterV2ray.toString() : 'ERROr',
+                    style: const TextStyle(
                       fontSize: 35,
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
